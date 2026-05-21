@@ -2,6 +2,7 @@ import type { ReactNode } from "react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
+import { ProductVariantCreateForm } from "@/components/admin/product-variant-create-form";
 import {
   getAdminProductBySlug,
   getAdminStatusClass,
@@ -115,7 +116,7 @@ export default async function AdminProductDetailPage({
               </h2>
 
               <p className="mt-3 text-sm leading-relaxed text-white/55">
-                Сейчас эта страница читает данные из БД. Редактирование и скрытие подключим следующим проходом.
+                Сейчас эта страница читает данные из БД. Позиции уже можно добавлять ниже на этой странице. Редактирование и скрытие подключим следующим проходом.
               </p>
 
               <div className="mt-6 grid gap-3">
@@ -126,12 +127,12 @@ export default async function AdminProductDetailPage({
                   Создать ещё товар
                 </Link>
 
-                <Link
-                  href="/nz-console/positions/new"
+                <a
+                  href="#add-variant"
                   className="rounded-xl border border-white/10 bg-white/[0.03] px-5 py-4 text-center text-sm font-medium transition-colors hover:border-blue-500/40 hover:bg-blue-500/10"
                 >
                   Добавить позицию
-                </Link>
+                </a>
               </div>
             </aside>
           </div>
@@ -184,11 +185,21 @@ export default async function AdminProductDetailPage({
                 ))
               ) : (
                 <div className="p-8 text-center text-sm text-white/45">
-                  У карточки пока нет SKU-позиций. Можно создать товар заново с первой SKU или добавить форму SKU следующим патчем.
+                  У карточки пока нет SKU-позиций. Добавьте первую позицию через форму ниже.
                 </div>
               )}
             </div>
           </div>
+
+          {product.source === "db" ? (
+            <div id="add-variant">
+              <ProductVariantCreateForm productId={product.id} productName={product.name} />
+            </div>
+          ) : (
+            <div className="mt-8 rounded-[28px] border border-orange-500/20 bg-orange-500/10 p-6 text-sm leading-relaxed text-orange-100/80">
+              Это демо-карточка из файлов. Позиции можно создавать только у товаров из БД.
+            </div>
+          )}
         </section>
       </div>
     </main>
