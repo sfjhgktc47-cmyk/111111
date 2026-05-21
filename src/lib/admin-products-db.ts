@@ -1,7 +1,6 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
-import { prisma } from "@/lib/db";
+/* eslint-disable @typescript-eslint/no-explicit-any */ import { prisma } from "@/lib/db";
 import "server-only";
+import { prisma } from "@/lib/db";
 
 import { prisma } from "@/lib/db";
 import { categories as fileCategories } from "@/data/categories";
